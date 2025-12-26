@@ -1,7 +1,7 @@
 import { Controller, Get, Post } from '@nestjs/common';
 import { JournalService } from '../services/journal.service';
 
-@Controller()
+@Controller('/journal')
 export class JournalController {
   constructor(private readonly journalService: JournalService) {}
 
@@ -11,7 +11,5 @@ export class JournalController {
   }
 
   @Post()
-  createPost() {
-    return this.journalService.createPost();
-  }
+  createPost() {}
 }
