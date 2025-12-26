@@ -6,12 +6,12 @@ export class JournalController {
   constructor(private readonly journalService: JournalService) {}
 
   @Get()
-  getRecords() {
-    return this.journalService.getRecords();
+  getPosts() {
+    return this.journalService.getPosts();
   }
 
   @Post()
-  createRecord() {
-    return this.journalService.createRecord();
+  createPost() {
+    return this.journalService.createPost();
   }
 }

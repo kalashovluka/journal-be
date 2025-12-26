@@ -2,11 +2,11 @@ import { Injectable } from '@nestjs/common';
 
 @Injectable()
 export class JournalService {
-  getRecords() {
-    console.debug('Get Records!');
+  getPosts() {
+    console.debug('Get Post!');
   }
 
-  createRecord() {
-    console.debug('Create Record!');
+  createPost() {
+    console.debug('Create Post!');
   }
 }
