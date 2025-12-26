@@ -1,13 +1,14 @@
 import { Module } from '@nestjs/common';
 import { ConfigModule, ConfigService } from '@nestjs/config';
-import { JournalController } from './modules/journal/controllers/journal.controller';
-import { JournalService } from './modules/journal/services/journal.service';
+import { PostsController } from './modules/posts/controllers/posts.controller';
+import { PostsService } from './modules/posts/services/posts.service';
 import { PrismaService } from './modules/prisma/services/prisma.service';
 import { UserService } from './modules/user/services/user.service';
 import { JwtModule } from '@nestjs/jwt';
 import { AuthController } from './modules/auth/controllers/auth.controller';
 import { AuthService } from './modules/auth/services/auth.service';
 import { LocalStrategy } from './modules/auth/strategies/local.strategy';
+import { JwtStrategy } from './modules/auth/strategies/jwt.strategy';
 
 @Module({
   imports: [
@@ -21,13 +22,14 @@ import { LocalStrategy } from './modules/auth/strategies/local.strategy';
       }),
     }),
   ],
-  controllers: [AuthController, JournalController],
+  controllers: [AuthController, PostsController],
   providers: [
     PrismaService,
-    JournalService,
+    PostsService,
     AuthService,
     UserService,
     LocalStrategy,
+    JwtStrategy,
   ],
 })
 export class AppModule {}
