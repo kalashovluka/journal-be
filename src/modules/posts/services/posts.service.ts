@@ -6,11 +6,18 @@ import { PrismaService } from 'src/modules/prisma/services/prisma.service';
 export class PostsService {
   constructor(private readonly prismaService: PrismaService) {}
 
-  getPosts(input: { page: number; perPage: number }) {
-    return this.prismaService.post.findMany({
-      take: input.perPage,
-      skip: input.page * input.perPage,
-    });
+  async getPosts(input: { page: number; perPage: number; userId: number }) {
+    const [posts, total] = await this.prismaService.$transaction([
+      this.prismaService.post.findMany({
+        take: input.perPage,
+        skip: input.page * input.perPage,
+        orderBy: { id: 'desc' },
+        where: { userId: input.userId },
+      }),
+      this.prismaService.post.count({ where: { userId: input.userId } }),
+    ]);
+
+    return { posts, total };
   }
 
   createPost(data: Prisma.PostCreateInput) {
